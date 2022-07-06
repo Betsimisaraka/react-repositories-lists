@@ -67,7 +67,7 @@ const RepositoryList = ({ searchQuery }: Props) => {
   return (
     <TableContainer>
       <Table variant='striped' colorScheme='teal'>
-        <TableCaption>React repositories list</TableCaption>
+        <TableCaption>{searchQuery} repositories list</TableCaption>
         <Thead>
           <Tr>
             <Th>Name</Th>
