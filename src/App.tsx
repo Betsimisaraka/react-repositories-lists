@@ -1,7 +1,7 @@
 import * as React from "react"
 import { ClientContext, GraphQLClient } from "graphql-hooks"
 import RepositoryList from "./component/RepositoryList"
-import { Button, ChakraProvider, theme, Text, Divider, Center } from "@chakra-ui/react"
+import { ChakraProvider, theme, Text, Divider, Center } from "@chakra-ui/react"
 import InputField from "./component/InputField"
 import { useState } from "react"
 import useDebounce from "./hooks/useDebounce"
