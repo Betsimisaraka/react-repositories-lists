@@ -1,6 +1,5 @@
 import { SearchIcon } from '@chakra-ui/icons'
-import { Button, Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
-import React from 'react'
+import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react'
 
 interface Props {
     inputValue: string;

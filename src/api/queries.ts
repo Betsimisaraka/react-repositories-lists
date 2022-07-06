@@ -5,12 +5,6 @@ export const searchRepositories = `
       type: REPOSITORY
       first: 5
     ) {
-      pageInfo {
-        endCursor
-        hasNextPage
-        hasPreviousPage
-        startCursor
-      }
       nodes {
         ... on Repository {
           description

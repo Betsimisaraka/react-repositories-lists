@@ -1,28 +1,23 @@
-import React, { useState } from 'react'
-
 import {
-    ChakraProvider,
-    TableContainer,
-    Table,
-    TableCaption,
-    Thead,
-    Tr,
-    Th,
-    Tbody,
-    Td,
-    Link,
-    theme,
-    CircularProgress,
-    Center,
-    Alert,
-    AlertDescription,
-    AlertTitle,
-    AlertIcon,
-  } from "@chakra-ui/react"
+  TableContainer,
+  Table,
+  TableCaption,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Link,
+  CircularProgress,
+  Center,
+  Alert,
+  AlertDescription,
+  AlertTitle,
+  AlertIcon,
+} from "@chakra-ui/react"
 import { useQuery } from 'graphql-hooks'
 import { searchRepositories } from '../api/queries'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
-import InputField from './InputField'
 
 interface RepositoryNode {
   id: string,
@@ -34,23 +29,23 @@ interface RepositoryNode {
 }
 
 interface RepositoriesResult {
-  search: {nodes: RepositoryNode[]}
+  search: { nodes: RepositoryNode[] }
 }
 
 interface Props {
   searchQuery: string
 }
 
-const RepositoryList = ({ searchQuery }:Props) => {
+const RepositoryList = ({ searchQuery }: Props) => {
 
-    const { loading, error, data } = useQuery<RepositoriesResult>(searchRepositories, {
-        variables: {
-          searchInput: searchQuery
-        }
-    })
+  const { loading, error, data } = useQuery<RepositoriesResult>(searchRepositories, {
+    variables: {
+      searchInput: searchQuery
+    }
+  })
 
-    if (loading) return <Center><CircularProgress size={200} color={'green'} isIndeterminate /></Center>
-    if (error) return <Alert
+  if (loading) return <Center><CircularProgress size={200} color={'green'} isIndeterminate /></Center>
+  if (error) return <Alert
     status='error'
     variant='subtle'
     flexDirection='column'
@@ -82,7 +77,7 @@ const RepositoryList = ({ searchQuery }:Props) => {
           </Tr>
         </Thead>
         <Tbody>
-          {data?.search?.nodes.map(({ id, name, stargazerCount, forkCount, description, url}) => (
+          {data?.search?.nodes.map(({ id, name, stargazerCount, forkCount, description, url }) => (
             <Tr key={id}>
               <Td>
                 <Link href={url} isExternal>

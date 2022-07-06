@@ -1,4 +1,3 @@
-import * as React from "react"
 import { ClientContext, GraphQLClient } from "graphql-hooks"
 import RepositoryList from "./component/RepositoryList"
 import { ChakraProvider, theme, Text, Divider, Center } from "@chakra-ui/react"
@@ -9,7 +8,7 @@ import useDebounce from "./hooks/useDebounce"
 const client = new GraphQLClient({
   url: 'https://api.github.com/graphql',
   headers: {
-    Authorization:`bearer ${process.env.REACT_APP_GH_TOKEN}`
+    Authorization: `bearer ${process.env.REACT_APP_GH_TOKEN}`
   }
 })
 
