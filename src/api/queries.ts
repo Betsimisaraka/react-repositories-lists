@@ -1,7 +1,7 @@
 export const searchRepositories = `
-{
+   query searchRepository($searchInput: String!){
     search(
-      query: "react"
+      query: $searchInput
       type: REPOSITORY
       first: 5
     ) {
@@ -21,6 +21,5 @@ export const searchRepositories = `
           id
         }
       }
-    }
-  }
+    }}
 `

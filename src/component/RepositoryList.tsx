@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
     ChakraProvider,
@@ -12,10 +12,17 @@ import {
     Td,
     Link,
     theme,
+    CircularProgress,
+    Center,
+    Alert,
+    AlertDescription,
+    AlertTitle,
+    AlertIcon,
   } from "@chakra-ui/react"
 import { useQuery } from 'graphql-hooks'
 import { searchRepositories } from '../api/queries'
 import { ExternalLinkIcon } from '@chakra-ui/icons'
+import InputField from './InputField'
 
 interface RepositoryNode {
   id: string,
@@ -30,21 +37,39 @@ interface RepositoriesResult {
   search: {nodes: RepositoryNode[]}
 }
 
-const RepositoryList = () => {
+interface Props {
+  searchQuery: string
+}
+
+const RepositoryList = ({ searchQuery }:Props) => {
 
     const { loading, error, data } = useQuery<RepositoriesResult>(searchRepositories, {
         variables: {
-          limit: 10
+          searchInput: searchQuery
         }
     })
 
-    console.log(data)
-
-    if (loading) return <div>'Loading...'</div>
-    if (error) return <div>'Something is wrong'</div>
+    if (loading) return <Center><CircularProgress size={200} color={'green'} isIndeterminate /></Center>
+    if (error) return <Alert
+    status='error'
+    variant='subtle'
+    flexDirection='column'
+    alignItems='center'
+    justifyContent='center'
+    textAlign='center'
+    height='200px'
+    color={'red'}
+  >
+    <AlertIcon boxSize='40px' mr={0} />
+    <AlertTitle mt={4} mb={1} fontSize='lg'>
+      Application error!
+    </AlertTitle>
+    <AlertDescription maxWidth='sm'>
+      Please check your github token or contact the admin ;)
+    </AlertDescription>
+  </Alert>
 
   return (
-    <ChakraProvider theme={theme}>
     <TableContainer>
       <Table variant='striped' colorScheme='teal'>
         <TableCaption>React repositories list</TableCaption>
@@ -72,7 +97,6 @@ const RepositoryList = () => {
         </Tbody>
       </Table>
     </TableContainer>
-  </ChakraProvider>
   )
 }
 
